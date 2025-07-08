@@ -1,0 +1,14 @@
+module encoder_4_2_tb;
+  reg D0,D1,D2,D3;
+  wire A,B;
+  encoder_4_2 encoder(D0,D1,D2,D3,A,B);
+  initial begin
+    $monitor("At time %0t: D0=%b D1=%b D2=%b D3=%b,A=%b B=%b",$time,D0,D1,D2,D3,A,B);
+    $dumpfile("encoder.vcd");
+    $dumpvars;
+    D0=1; D1=0; D2=0; D3=0; #1;
+    D0=0; D1=1; D2=0; D3=0; #1;
+    D0=0; D1=0; D2=1; D3=0; #1;
+    D0=0; D1=0; D2=0; D3=1;
+  end
+endmodule
