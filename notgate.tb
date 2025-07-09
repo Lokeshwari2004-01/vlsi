@@ -1,0 +1,12 @@
+module not_gate_assign_tb;
+reg a;
+wire c;
+  not_gate_p not2(.a(a),.c(c));
+  initial begin
+    $monitor($time,"a=%b,c=%b",a,c);
+    $dumpvars;
+  #000 a=0;
+  #100 a=1;
+    $finish;
+  end
+endmodule
