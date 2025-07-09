@@ -1,0 +1,15 @@
+module dis_7_tb;
+  reg [3:0]bcd;
+  wire [6:0]seg;
+  dis_7_tb UUT(.bcd(bcd),.seg(seg));
+  initial begin
+    $display("bcd|segment(abcdefg)");
+    for(bcd=0;bcd<10;bcd=bcd+1)
+      begin
+        #10;
+        $display("%d 1%d",bcd,seg);
+      end 
+    $finish;
+  end
+endmodule
+             
