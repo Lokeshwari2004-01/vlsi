@@ -1,0 +1,46 @@
+// Code your testbench here
+// or browse Examples
+module tb_clock_divider_50mhz_to_1hz;
+  reg clk_in;
+  reg reset;
+  wire clk_out;
+  clock_divider_test dut(
+    .clk_in(clk_in),
+    .reset(reset),
+    .clk_out(clk_out)
+  );
+  always #10 clk_in=~clk_in;
+  initial begin
+    $display("starting simulation...");
+    $dumpfile("clock_divider.vcd");
+    $dumpvars(0,tb_clock_divider_50mhz_to_1hz);
+    clk_in=0;
+    reset=1;
+    #50;
+    reset=0;
+    #2000;
+    $display("simulation finished.");
+    $finish;
+  end
+endmodule
+module clock_divider_test(
+  input wire clk_in,
+  input wire reset,
+  output reg clk_out
+);
+  localparam integer MAX_COUNT =10;
+  reg[3:0]counter=0;
+  always @(posedge clk_in)begin
+    if(reset)begin
+      counter<=0;
+      clk_out<=0;
+    end else begin
+      if(counter==(MAX_COUNT -1))begin
+        counter<=0;
+        clk_out<=~clk_out;
+      end else begin
+        counter<= counter+1;
+      end
+    end
+  end
+endmodule
