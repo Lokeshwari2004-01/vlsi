@@ -1,0 +1,6 @@
+module full_adder_s (
+    input a,b,cin,
+    output sum,carry
+);
+
+endmodule
