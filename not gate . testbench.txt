@@ -1,0 +1,13 @@
+module not_test;
+reg a;
+wire c;
+not_gate  not_test(c,a);
+initial
+begin
+$monitor($time,"a=%b,c=%b",a,c);
+  $dumpfile("not gate.vcd");
+  $dumpvars;
+  a = 0; #1;
+  a = 1; #1;
+end
+endmodule
