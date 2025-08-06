@@ -1,0 +1,24 @@
+`timescale 1ns/1ps
+module tb_universal_shift_register;
+    reg clk, reset;
+    reg [1:0] sel;
+    reg [3:0] data_in;
+    wire [3:0] q;
+
+    universal_shift_register uut(clk, reset, sel, data_in, q);
+
+    always #5 clk = ~clk;
+
+    initial begin
+        $dumpfile("shift_reg.vcd"); $dumpvars(0, tb_universal_shift_register);
+        clk = 0; reset = 1; sel = 2'b00; data_in = 4'b1010;
+        #10 reset = 0;
+
+        sel = 2'b11; #10;  // Load
+        sel = 2'b01; #10;  // Left
+        sel = 2'b10; #10;  // Right
+        sel = 2'b00; #10;  // Hold
+
+        $finish;
+    end
+endmodule
