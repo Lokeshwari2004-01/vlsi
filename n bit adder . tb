@@ -1,0 +1,17 @@
+module tb_n_bit_adder;
+    parameter N = 8;
+    reg [N-1:0] a, b;
+    wire [N:0] sum;
+
+    n_bit_adder #(N) uut(a, b, sum);
+
+    initial begin
+        $dumpfile("nbit_adder.vcd"); $dumpvars(0, tb_n_bit_adder);
+
+        a = 8'h55; b = 8'h0A; #10;
+        a = 8'hFF; b = 8'h01; #10;
+        a = 8'hAA; b = 8'h55; #10;
+
+        $finish;
+    end
+endmodule
